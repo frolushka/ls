@@ -3,20 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   name.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbednar <sbednar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edraugr- <edraugr-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 08:06:13 by sbednar           #+#    #+#             */
-/*   Updated: 2019/02/04 02:10:39 by sbednar          ###   ########.fr       */
+/*   Updated: 2019/03/21 14:59:10 by edraugr-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-char	*get_name(t_finf const *f)
+char		*get_name(t_finf const *f, int flags)
 {
-	if (!f || !(f->dir))
+	int		t;
+	char	*n;
+	char	*tmp;
+	char	buf[MAXNAMLEN];
+
+	t = get_type(f);
+	ft_bzero(buf, MAXNAMLEN);
+	if (!f)
 		return (NULL);
-	return (f->dir->d_name);
+	if (t == DT_LNK && flags & FLAG_L)
+	{
+		tmp = ft_strjoin(f->path, "/");
+		n = ft_strjoin(tmp, f->name);
+		free(tmp);
+		readlink(n, buf, MAXNAMLEN);
+		free(n);
+		tmp = ft_strjoin(" -> ", buf);
+		n = ft_strjoin(f->name, tmp);
+		free(tmp);
+	}
+	else
+		n = strdup(f->name);
+	return (n);
 }
 
 static void	set_colors_add(t_finf const *f)
@@ -42,14 +62,15 @@ static void	set_colors_add(t_finf const *f)
 	(t == DT_CHR ? write(1, "\033[34;43m", 8) : 0);
 }
 
-int	print_name(t_finf const *f)
+int			print_name(t_finf const *f, int flags)
 {
 	char	*n;
 
-	if (!(n = get_name(f)))
+	if (!(n = get_name(f, flags)))
 		return (-1);
 	set_colors_add(f);
 	write(1, n, ft_strlen(n));
 	write(1, "\033[0m", 5);
+	free(n);
 	return (0);
 }

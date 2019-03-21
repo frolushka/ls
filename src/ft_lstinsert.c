@@ -6,19 +6,14 @@
 /*   By: edraugr- <edraugr-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 00:52:06 by sbednar           #+#    #+#             */
-/*   Updated: 2019/01/23 17:31:35 by edraugr-         ###   ########.fr       */
+/*   Updated: 2019/03/21 09:23:01 by edraugr-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <dirent.h>
 #include <stdio.h>
-
-/*
- *	1	n1 > n2
- *	0	n1 == n2
- *	-1	n1 < n2
- */
+#include <ft_ls.h>
 
 static void	kostil_for_la_norme(t_list **a, t_list *n)
 {
@@ -26,7 +21,7 @@ static void	kostil_for_la_norme(t_list **a, t_list *n)
 	*a = n;
 }
 
-void	ft_lstinsert(t_list **alst, t_list *node,
+void		ft_lstinsert(t_list **alst, t_list *node,
 	int (*comp)(void *n1, void *n2))
 {
 	t_list	*cur;

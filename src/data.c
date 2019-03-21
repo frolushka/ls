@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbednar <sbednar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edraugr- <edraugr-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 08:05:15 by sbednar           #+#    #+#             */
-/*   Updated: 2019/01/29 11:20:54 by sbednar          ###   ########.fr       */
+/*   Updated: 2019/03/21 09:22:05 by edraugr-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*get_data(t_finf const *f)
 	return (ctime(&f->stat->st_mtimespec.tv_sec));
 }
 
-int	print_data(t_finf const *f)
+int		print_data(t_finf const *f)
 {
 	char	*n;
 	int		c;

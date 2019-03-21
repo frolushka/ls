@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbednar <sbednar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edraugr- <edraugr-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 20:59:33 by sbednar           #+#    #+#             */
-/*   Updated: 2019/01/29 08:42:31 by sbednar          ###   ########.fr       */
+/*   Updated: 2019/03/21 18:38:53 by edraugr-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ static int	parse_flags(char *str)
 	while (str[i])
 	{
 		if (str[i] == 'l')
-			res |= FLAG_l;
+			res |= FLAG_L;
 		else if (str[i] == 'R')
 			res |= FLAG_R;
 		else if (str[i] == 'a')
-			res |= FLAG_a;
+			res |= FLAG_A;
 		else if (str[i] == 'r')
-			res |= FLAG_r;
+			res |= FLAG_RLOW;
 		else if (str[i] == 't')
-			res |= FLAG_t;
+			res |= FLAG_T;
 		else
 			return (-i);
 		++i;
@@ -40,19 +40,21 @@ static int	parse_flags(char *str)
 	return (res);
 }
 
-// static void inline	print_wrf(char const c)
-// {
-// 	write(1, FT_LS, sizeof(FT_LS));
-// 	write(1, ILLOPT, sizeof(ILLOPT));
-// 	write(1, &c, 1);
-// 	write(1, "\n", 1);
-// 	write(1, USAGE, sizeof(USAGE));
-// }
+static void	costil_for_norm(int i, int argc, char **argv, int *flags)
+{
+	*flags |= FLAG_MULT;
+	while (++i <= argc)
+	{
+		ft_ls(argv[i - 1], *flags);
+		i == argc || check_file((char const *)argv[i - 1], *flags) != 0 ?
+			0 : print4("\n", "", "", "");
+	}
+}
 
-static int			flag_reader(int argc, char **argv, int *flags)
+static char	flag_reader(int argc, char **argv, int *flags)
 {
 	int	i;
-	int		tmp;
+	int	tmp;
 
 	i = 0;
 	*flags = 0;
@@ -62,34 +64,34 @@ static int			flag_reader(int argc, char **argv, int *flags)
 			break ;
 		tmp = parse_flags(argv[i]);
 		if (tmp < 0)
-			return (tmp); // if < 0 : illegal oper
+			return (argv[i][-tmp]);
 		else
 			*flags |= tmp;
 	}
 	if ((argc - i) == 0)
 		ft_ls(".", *flags);
+	else if ((argc - i) == 1)
+		ft_ls(argv[argc - 1], *flags);
 	else
-	{
-		*flags |= FLAG_mult;
-		while (++i <= argc)
-			ft_ls(argv[i - 1], *flags);
-	}
+		costil_for_norm(i, argc, argv, flags);
 	return (0);
 }
 
-int					main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
-	int	flags;
+	int		flags;
+	char	c;
 
+	flags = 0;
 	if (argc > 1)
 	{
-		if (flag_reader(argc, argv, &flags) < 0)
-		{
-			printf("illigal option\n");
-			//todo
-		}
+		c = flag_reader(argc, argv, &flags);
+		if (c != 0)
+			print4(FT_LS, ILLOPT, &c, USAGE);
 	}
 	else
 		ft_ls(".", 0);
+	if (!(flags & FLAG_L))
+		write(1, "\n", 1);
 	return (0);
 }

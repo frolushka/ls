@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sbednar <sbednar@student.42.fr>            +#+  +:+       +#+         #
+#    By: edraugr- <edraugr-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 23:40:02 by sbednar           #+#    #+#              #
-#    Updated: 2019/01/30 17:57:05 by sbednar          ###   ########.fr        #
+#    Updated: 2019/03/19 23:12:58 by edraugr-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,6 @@ SRC		=	ft_memset.c \
 			ft_lstadd_back.c \
 			ft_lstiter.c \
 			ft_lstmap.c \
-			ft_lstinsert.c \
 			ft_islower.c \
 			ft_isupper.c \
 			ft_isstn.c \
@@ -92,7 +91,7 @@ SRC		=	ft_memset.c \
 OBJ		= 	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 
 CC 		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra -g
+CFLAGS	=	-g -Wall -Werror -Wextra
 
 all: $(NAME)
 

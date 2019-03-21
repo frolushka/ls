@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbednar <sbednar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edraugr- <edraugr-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 06:56:12 by sbednar           #+#    #+#             */
-/*   Updated: 2019/01/29 12:45:27 by sbednar          ###   ########.fr       */
+/*   Updated: 2019/03/21 09:30:28 by edraugr-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,3 @@ int		print_type(t_finf const *f)
 	write(1, out, sizeof(out));
 	return (0);
 }
-
-

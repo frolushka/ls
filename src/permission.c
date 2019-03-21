@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   permission.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbednar <sbednar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edraugr- <edraugr-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 07:31:28 by sbednar           #+#    #+#             */
-/*   Updated: 2019/01/29 11:01:33 by sbednar          ###   ########.fr       */
+/*   Updated: 2019/03/21 09:45:08 by edraugr-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int	get_permission(t_finf const *f)
+int			get_permission(t_finf const *f)
 {
 	if (!f || !(f->stat))
 		return (-1);
@@ -52,16 +52,17 @@ static int	print_other(int const p)
 	return (0);
 }
 
-int	print_permission(t_finf const *f)
+int			print_permission(t_finf const *f)
 {
-	char	*fn;
-	acl_t	a;
-	acl_entry_t d;
-	int		p;
+	char		*fn;
+	char		*tmp;
+	acl_t		a;
+	acl_entry_t	d;
+	int			p;
 
-	if ((p = get_permission(f)) < 0)
-		return (-1);
-	fn = ft_strjoin(ft_strjoin(f->path, "/"), f->name);
+	IFRET(((p = get_permission(f)) < 0), -1);
+	tmp = ft_strjoin(f->path, "/");
+	fn = ft_strjoin(tmp, f->name);
 	print_owner(p);
 	print_group(p);
 	print_other(p);
@@ -71,10 +72,11 @@ int	print_permission(t_finf const *f)
 		acl_free(a);
 		a = NULL;
 	}
-	// TO DO
 	if (listxattr(fn, NULL, 0, XATTR_NOFOLLOW) > 0)
 		write(1, "@", 1);
 	else if (a)
 		write(1, "+", 1);
+	acl_free(a);
+	FREE2(tmp, fn);
 	return (0);
 }

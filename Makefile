@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sbednar <sbednar@student.42.fr>            +#+  +:+       +#+         #
+#    By: edraugr- <edraugr-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/06 16:23:16 by sbednar           #+#    #+#              #
-#    Updated: 2019/01/29 11:33:08 by sbednar          ###   ########.fr        #
+#    Updated: 2019/03/21 07:05:56 by edraugr-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LIBS_DIRS	=	$(shell $(foreach dir,$(LIB_DIRS),echo "-L$(dir)";))
 LIBS_SRCS	=	$(shell $(foreach src,$(LIB_SRCS),echo "-l$(src)";))
 
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -g
+CFLAGS		=	-g -Wall -Wextra -Werror
 
 all: lall
 	@echo $(LIB_SRCS)

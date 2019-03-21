@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   group_name.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbednar <sbednar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edraugr- <edraugr-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 07:57:12 by sbednar           #+#    #+#             */
-/*   Updated: 2019/01/29 08:36:40 by sbednar          ###   ########.fr       */
+/*   Updated: 2019/03/21 07:56:21 by edraugr-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,13 @@ int		print_group_name(t_finf const *f)
 		return (-1);
 	write(1, name, ft_strlen(name));
 	return (0);
+}
+
+int		get_group_tabs(t_finf const *f)
+{
+	char	*name;
+
+	if (!(name = get_group_name(f)))
+		return (-1);
+	return (ft_strlen(name) / 8 + 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   owner_name.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbednar <sbednar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: edraugr- <edraugr-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 07:48:12 by sbednar           #+#    #+#             */
-/*   Updated: 2019/01/29 08:37:44 by sbednar          ###   ########.fr       */
+/*   Updated: 2019/03/21 09:28:12 by edraugr-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,13 @@ int		print_owner_name(t_finf const *f)
 		return (-1);
 	write(1, name, ft_strlen(name));
 	return (0);
+}
+
+int		get_owner_tabs(t_finf const *f)
+{
+	char	*name;
+
+	if (!(name = get_owner_name(f)))
+		return (-1);
+	return (ft_strlen(name) / 8 + 1);
 }
