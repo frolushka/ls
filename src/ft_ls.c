@@ -6,7 +6,7 @@
 /*   By: edraugr- <edraugr-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 20:57:28 by sbednar           #+#    #+#             */
-/*   Updated: 2019/03/21 17:19:13 by edraugr-         ###   ########.fr       */
+/*   Updated: 2019/03/21 19:12:46 by edraugr-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static int		recurse_ls(char const *fn, int flags)
 	DIR		*dirp;
 	t_dir	*dir;
 	char	*tmp;
+	char	*tmp2;
 
 	if (!(dirp = opendir(fn)))
 		return (-1);
@@ -90,10 +91,13 @@ static int		recurse_ls(char const *fn, int flags)
 			if (dir->d_name[0] == '.' && !(flags & FLAG_A))
 				continue ;
 			print4("\n", "", "", "");
-			tmp = ft_strjoin(ft_strjoin(fn, "/"), dir->d_name);
+			tmp2 = ft_strjoin(fn, "/");
+			tmp = ft_strjoin(tmp2, dir->d_name);
 			ft_ls(tmp, flags);
 			if (*tmp)
 				free(tmp);
+			if (*tmp2)
+				free(tmp2);
 		}
 	closedir(dirp);
 	return (0);
